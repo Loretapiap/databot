@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba técnica Lorena Tapia</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+  <div id="app">
+    <nav class="navbar navbar-default no-margin">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header fixed-brand">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle" @click="menuToggle = !menuToggle">
+          <span class="material-icons">arrow_left</span>
+        </button>
+        <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> M-33</a>
+      </div>
+      <!-- navbar-header-->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2">
+              <span class="material-icons">arrow_left</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!-- bs-example-navbar-collapse-1 -->
+    </nav>
+    <div id="wrapper" :class="{'toggled-2' : menuToggle}">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+          <li>
+            <a href="#">
+              <i class="material-icons">
+                trending_up
+              </i> Inicio</a>
+            </li>
+            <li class="active">
+              <a href="#">
+                <span class="material-icons">restaurant</span> Pedidos y reservas</a>
+                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                  <li><a href="#">link1</a></li>
+                  <li><a href="#">link2</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">
+                    local_bar
+                  </i> Productos
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">
+                    web
+                  </i> Categorías
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">
+                    storefront
+                  </i> Local(es)
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">
+                    card_giftcard
+                  </i> Promociones
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">
+                    person
+                  </i> Clientes
+                </a>
+              </li>
+
+
+
+            </ul>
+          </div>
+          <!-- /#sidebar-wrapper -->
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+              <div class="row">
+                <div class="col-12">
+                  <h1>Pedidos</h1>
+                  <button class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">+ Nuevo pedido
+                  </button>
+
+                  <button class="btn btn-secondary">Reservas</button>
+
+                  <button class="btn btn-link">Historial</button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+
+                  <label for="inprocess">En proceso</label>
+                  <input id="inprocess" type="checkbox" value="inprocess" v-model="states">
+                  <label for="ready">Listo para entregar</label>
+                  <input id="live-action" type="checkbox" value="ready" v-model="states">
+                  <label for="request">Solicitado</label>
+                  <input id="live-action" type="checkbox" value="request" v-model="states">
+
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-3" v-for="(card, index) in filteredCards">
+                        <div class="card">
+                          <div class="card-header" :class="card.state">
+                            Nº {{ index }}
+
+                            <!-- timer -->
+                            <span v-if="card.countDown">
+                              {{ card.countDown | minutes }}
+
+                            </span>
+                            
+                          </div>
+                          <div class="card-body">
+                            <span class="badge badge-success">Success</span>
+                            {{ card.date }}
+                          </div>
+                          <div class="card-footer">
+                            <span class="material-icons" v-if="card.pay">check</span>
+                            {{card.price}}
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- /#page-content-wrapper -->
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-uppercase" id="exampleModalLongTitle">
+                  Nuevo pedido
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>
+                              Sin productos agregados
+                            </td>
+                          </tr>
+                          <tr v-if="false">
+                            <th scope="row">X</th>
+                            <td>Nombre</td>
+                            <td>(PRECIO))</td>
+                            <td>$TOTAL</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row justify-content-between">
+                    <button class="btn btn-primary">
+                      + Agregar producto(s)
+                    </button>
+
+                    <b>Total:</b>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Comentarios <i>(No lo ve el cliente)</i></label>
+                        <textarea name="" id="exampleInputEmail1" cols="30" rows="3" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+
+
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger">
+                  <i class="material-icons">delete</i>
+                </button>
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Salir sin guardar</button>
+                <button type="button" class="btn btn-primary btn-block" @click="createProduct()">Crear pedido</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- rut formater -->
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script>
+      <script src="assets/main.js"></script>
+    </body>
+
+    </html>
