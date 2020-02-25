@@ -25,21 +25,23 @@
         </div>
       </div>
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <div class="nav-item">
-            <div class="breadcrumb">
-              <ul>
-                <li>Pedidos y reservar</li>
-              </ul>
-            </div>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div class="nav-item">
+          <div class="pl-5">
+            <p class="mb-0">
+              <small>Pedidos y reservar</small> >
+              <small>Pedidos</small> >
+              <small>Todos</small>
+            </p>
+          </div>
 
+        </div>
+        <div class="navbar-nav">
+          <div class="nav-item d-flex align-items-center justify-content-center px-2">
+            <i class="material-icons icons-xl">calendar_today</i>
           </div>
-          <div class="nav-item">
-            <i class="material-icons">calendar_today</i>
-          </div>
-          <div class="nav-item">
-            <i class="material-icons">insert_drive_file</i>
+          <div class="nav-item d-flex align-items-center justify-content-center px-2">
+            <i class="material-icons icons-xl">insert_drive_file</i>
           </div>
           <div class="nav-item profile">
             <div class="d-flex align-items-center px-3">
@@ -143,12 +145,22 @@
               <div class="row">
                 <div class="col-12 py-3">
                   <h1>Pedidos</h1>
+
                   <button class="btn btn-yellow" data-toggle="modal" data-target="#exampleModalCenter">+ Nuevo pedido
                   </button>
 
-                  <button class="btn btn-secondary"><i class="material-icons">menu_book</i> Reservas</button>
+                  <button class="btn btn-secondary mx-2">
+                    <div class="w-100 d-flex align-items-center">
+                      <i class="material-icons mr-2">menu_book</i> Reservas
+                    </div>
+                  </button>
 
-                  <button class="btn btn-white"><i class="material-icons">history</i> Historial</button>
+                  <button class="btn btn-white">
+                    <div class="w-100 d-flex align-items-center">
+                      <i class="material-icons mr-2">history</i> Historial
+                    </div>
+                  </button>
+
                 </div>
               </div>
 
@@ -168,9 +180,9 @@
                       <a class="nav-link" role="tab" data-toggle="tab" @click="states = ['ready']">Listo para entregar</a>
                     </li>
                     <li class="flex-grow-1 d-flex align-items-center justify-content-end">
-                      <i class="material-icons">account_box</i>
-                      <i class="material-icons">toggle_off</i>
-                      <i class="material-icons">list</i>
+                      <i class="material-icons icons-xl">account_box</i>
+                      <i class="material-icons icons-xl">toggle_off</i>
+                      <i class="material-icons icons-xl">list</i>
                     </li>
                   </ul>
 
@@ -183,7 +195,7 @@
                             <div class="container-fluid">
                               <div class="row">
                                 <div class="col-md-3" v-for="(card, index) in filteredCards">
-                                  <div class="card">
+                                  <div class="card" @click="openModal(card)">
                                     <div class="card-header" :class="card.state">
                                       Nº {{ index }}
           
@@ -288,8 +300,8 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title text-uppercase" id="exampleModalLongTitle">
-                  Nuevo pedido
+                <h5 class="modal-title text-uppercase">
+                  {{modalInfo.title}}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -298,37 +310,13 @@
               <div class="modal-body">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              Sin productos agregados
-                            </td>
-                          </tr>
-                          <tr v-if="false">
-                            <th scope="row">X</th>
-                            <td>Nombre</td>
-                            <td>(PRECIO))</td>
-                            <td>$TOTAL</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="row justify-content-between">
-                    <button class="btn btn-primary">
-                      + Agregar producto(s)
-                    </button>
-
-                    <b>Total:</b>
-                  </div>
-                  <div class="row">
                     <div class="col">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Comentarios <i>(No lo ve el cliente)</i></label>
-                        <textarea name="" id="exampleInputEmail1" cols="30" rows="3" class="form-control"></textarea>
-                      </div>
+                      <p>{{modalInfo.title}}</p>
+                      <p>{{modalInfo.type}}</p>
+                      <p>{{modalInfo.hour}}</p>
+                      <p>{{modalInfo.date}}</p>
+                      <p>{{modalInfo.price}}</p>
+                      <p>{{modalInfo.state}}</p>
                     </div>
                   </div>
                 </div>
@@ -337,11 +325,7 @@
 
               </div>
               <div class="modal-footer">
-                <button class="btn btn-danger">
-                  <i class="material-icons">delete</i>
-                </button>
                 <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Salir sin guardar</button>
-                <button type="button" class="btn btn-primary btn-block" @click="createProduct()">Crear pedido</button>
               </div>
             </div>
           </div>

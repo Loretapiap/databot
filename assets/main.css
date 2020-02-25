@@ -275,3 +275,8 @@ body {
   object-fit: cover;
   border-radius: 100%;
 }
+
+.icons-xl {
+  font-size: 3em; 
+  color: #707070;
+}

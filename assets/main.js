@@ -32,7 +32,15 @@ new Vue({
           price: 16500,
           state: "request"
         }
-      ]
+      ],
+      modalInfo: {
+        title: "",
+        type: "",
+        hour: "",
+        date: "",
+        price: "",
+        state: ""
+      }
     }
   },
 
@@ -69,8 +77,10 @@ new Vue({
 
 
   methods: {
-
-    // timer
+    openModal(card) {
+      this.modalInfo = card;
+      $("#onlyread").modal("show");
+    },
     createProduct(){
       this.cards.push({
         title: "",
