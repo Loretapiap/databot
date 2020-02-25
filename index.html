@@ -15,16 +15,25 @@
 <body>
 
   <div id="app">
-    <nav class="navbar navbar-default no-margin">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header fixed-brand">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle" @click="menuToggle = !menuToggle">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+      <div class="d-flex bb-gray align-items-center">
+        <a href="#"  class="navbar-brand">
+          <img src="assets/acomer.png" alt="" class="img-fluid">
+        </a>
+        <div class="p-2 toggle-arrow flex-grow-1 d-flex justify-content-center align-items-center" data-toggle="collapse" id="menu-toggle" @click="menuToggle = !menuToggle">
           <span class="material-icons">arrow_left</span>
-        </button>
-        <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> M-33</a>
+        </div>
       </div>
-      <!-- navbar-header-->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Features</a>
+          <a class="nav-item nav-link" href="#">Pricing</a>
+          <a class="nav-item nav-link disabled" href="#">Disabled</a>
+        </div>
+      </div>
+      <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active">
             <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2">
@@ -32,22 +41,35 @@
             </button>
           </li>
         </ul>
-      </div>
-      <!-- bs-example-navbar-collapse-1 -->
+      </div> -->
     </nav>
+
     <div id="wrapper" :class="{'toggled-2' : menuToggle}">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 py-2">
+              <select class="custom-select custom-select-lg">
+                <option selected>Elige sucursal</option>
+                <option value="1">Sucursal 1</option>
+                <option value="2">Sucursal 2</option>
+                <option value="3">Sucursal 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
           <li>
             <a href="#">
-              <i class="material-icons">
+              <i class="material-icons ml-3 mr-1">
                 trending_up
               </i> Inicio</a>
             </li>
             <li class="active">
               <a href="#">
-                <span class="material-icons">restaurant</span> Pedidos y reservas</a>
+                <i class="material-icons ml-3 mr-1">restaurant</i> Pedidos y reservas</a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                   <li><a href="#">link1</a></li>
                   <li><a href="#">link2</a></li>
@@ -56,7 +78,7 @@
 
               <li>
                 <a href="#">
-                  <i class="material-icons">
+                  <i class="material-icons ml-3 mr-1">
                     local_bar
                   </i> Productos
                 </a>
@@ -64,7 +86,7 @@
 
               <li>
                 <a href="#">
-                  <i class="material-icons">
+                  <i class="material-icons ml-3 mr-1">
                     web
                   </i> Categorías
                 </a>
@@ -72,7 +94,7 @@
 
               <li>
                 <a href="#">
-                  <i class="material-icons">
+                  <i class="material-icons ml-3 mr-1">
                     storefront
                   </i> Local(es)
                 </a>
@@ -80,7 +102,7 @@
 
               <li>
                 <a href="#">
-                  <i class="material-icons">
+                  <i class="material-icons ml-3 mr-1">
                     card_giftcard
                   </i> Promociones
                 </a>
@@ -88,7 +110,7 @@
 
               <li>
                 <a href="#">
-                  <i class="material-icons">
+                  <i class="material-icons ml-3 mr-1">
                     person
                   </i> Clientes
                 </a>
@@ -100,7 +122,7 @@
           </div>
           <!-- /#sidebar-wrapper -->
           <!-- Page Content -->
-          <div id="page-content-wrapper" class="img-bg">
+          <div id="page-content-wrapper" class="img-bg min-h">
             <div class="container-fluid xyz">
               <div class="row">
                 <div class="col-12">
@@ -108,52 +130,70 @@
                   <button class="btn btn-yellow" data-toggle="modal" data-target="#exampleModalCenter">+ Nuevo pedido
                   </button>
 
-                  <button class="btn btn-secondary">Reservas</button>
+                  <button class="btn btn-secondary"><i class="material-icons">menu_book</i> Reservas</button>
 
-                  <button class="btn btn-link">Historial</button>
+                  <button class="btn btn-white"><i class="material-icons">history</i> Historial</button>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-12">
+                  <ul class="nav nav-tabs nav-stats" role="tablist">
+                    <li class="nav-item bg-all">
+                      <a class="nav-link active" role="tab" data-toggle="tab" @click="states = []">Todos</a>
+                    </li>
+                    <li class="nav-item bg-request">
+                      <a class="nav-link" role="tab" data-toggle="tab" @click="states = ['request']">Solicitado</a>
+                    </li>
+                    <li class="nav-item bg-inprocess">
+                      <a class="nav-link" role="tab" data-toggle="tab" @click="states = ['inprocess']">En proceso</a>
+                    </li>
+                    <li class="nav-item bg-ready">
+                      <a class="nav-link" role="tab" data-toggle="tab" @click="states = ['ready']">Listo para entregar</a>
+                    </li>
+                  </ul>
 
-                  <label for="inprocess">En proceso</label>
-                  <input id="inprocess" type="checkbox" value="inprocess" v-model="states">
-                  <label for="ready">Listo para entregar</label>
-                  <input id="live-action" type="checkbox" value="ready" v-model="states">
-                  <label for="request">Solicitado</label>
-                  <input id="live-action" type="checkbox" value="request" v-model="states">
-
-
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-3" v-for="(card, index) in filteredCards">
-                        <div class="card">
-                          <div class="card-header" :class="card.state">
-                            Nº {{ index }}
-
-                            <!-- timer -->
-                            <span v-if="card.countDown">
-                              {{ card.countDown | minutes }}
-
-                            </span>
-                            
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-12">         
+          
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-md-3" v-for="(card, index) in filteredCards">
+                                  <div class="card">
+                                    <div class="card-header" :class="card.state">
+                                      Nº {{ index }}
+          
+                                      <!-- timer -->
+                                      <span v-if="card.countDown">
+                                        {{ card.countDown | minutes }}
+          
+                                      </span>
+                                      
+                                    </div>
+                                    <div class="card-body">
+                                      <span class="badge badge-success">Success</span>
+                                      {{ card.date }}
+                                    </div>
+                                    <div class="card-footer">
+                                      <span class="material-icons" v-if="card.pay">check</span>
+                                      {{card.price}}
+                                    </div>
+                                  </div>
+          
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="card-body">
-                            <span class="badge badge-success">Success</span>
-                            {{ card.date }}
-                          </div>
-                          <div class="card-footer">
-                            <span class="material-icons" v-if="card.pay">check</span>
-                            {{card.price}}
-                          </div>
+          
                         </div>
-
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

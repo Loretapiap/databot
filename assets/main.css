@@ -18,15 +18,12 @@ body {
   padding: 0.5em 1.5em;
 }
 
-@media(min-width: 768px) {
-    .vh-100 {
-        height: 100vh;
-    }
-}
-
-
 .nav-pills > li > a {
   border-radius: 0;
+}
+
+.min-h {
+  min-height: calc(100vh - 65px);
 }
 
 #wrapper {
@@ -43,15 +40,38 @@ body {
   overflow: hidden;
 }
 
+.brand {
+  width: 250px;
+}
+
+.bb-gray {
+  width: 250px;
+  background-color: #313131;
+  border-bottom: 1px solid #B5B5B5;
+}
+
+.toggle-arrow {
+  color: #B5B5B5;
+  border-left: 1px solid #B5B5B5;
+}
+
+.toggle-arrow  .material-icons {
+  font-size: 3em;
+}
+
+.toggle-arrow:hover {
+  cursor: pointer;
+}
+
 #sidebar-wrapper {
   z-index: 1000;
   position: absolute;
   left: 250px;
   width: 0;
-  height: 100%;
+  height: calc(100vh - 65px);
   margin-left: -250px;
   overflow-y: auto;
-  background: #000;
+  background: #313131;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -83,9 +103,13 @@ body {
 }
 /* Sidebar Styles */
 
+.custom-select {
+  height: auto;
+  font-size: 1em;
+  color: #999999;
+}
+
 .sidebar-nav {
-  position: absolute;
-  top: 0;
   width: 250px;
   margin: 0;
   padding: 0;
@@ -94,7 +118,6 @@ body {
 }
 
 .sidebar-nav li {
-  text-indent: 15px;
   line-height: 40px;
 }
 
@@ -194,4 +217,51 @@ body {
 .ready {
   background: green;
   color: white;
+}
+
+/* flex */
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+/*tabs */
+
+.tab-content, .nav-stats {
+  border: 1px solid #707070;
+  background-color: #E8E8E8;
+}
+
+.tab-content {
+  padding : 5px 15px;
+  border-top-width: 0;
+}
+
+.nav-stats {
+  border-bottom-width: 0;
+}
+
+.nav-stats .nav-item, .nav-stats .nav-link, .nav-stats a {
+  color: #747474;
+}
+.bg-all, .bg-all .nav-link {
+  background: #E8E8E8 !important;
+}
+
+.bg-request, .bg-request .nav-link {
+  background: #FFEBEE !important;
+}
+ 
+.bg-inprocess, .bg-inprocess .nav-link {
+  background: #FFFDE7 !important;
+}
+
+.bg-ready , .bg-ready .nav-link {
+  background: #E8F7E9 !important;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+  font-weight: bold;
+  border-width: 0;
 }
