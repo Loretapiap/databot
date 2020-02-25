@@ -7,10 +7,15 @@ body {
 }
 
 .img-bg {
-    background-image: url('bg.jpg');
-    background-size: cover;
-    background-position: left;
-    background-repeat: no-repeat;
+    background-image: url('bg.png');
+}
+
+.btn-yellow {
+  background: #FF9900;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 50px;
+  padding: 0.5em 1.5em;
 }
 
 @media(min-width: 768px) {
@@ -18,15 +23,6 @@ body {
         height: 100vh;
     }
 }
-
-@media(max-width: 768px) {
-    .img-bg {
-        height : 25vh;
-    }
-}
-
-// sidebar
-
 
 
 .nav-pills > li > a {

@@ -46,16 +46,18 @@ new Vue({
        if (this.states.length && card.state) {
          return (match && this.states.includes(card.state.toLowerCase()));
        }
-
+       
        if(card.countDown) {
-    
-          if(card.countDown > 0) {
-              setTimeout(() => {
-                card.countDown -= 1
-              }, 1000)
-          }
-      
+        if(card.countDown > 0) {
+          setTimeout(() => {
+            card.countDown -= 1
+          }, 1000)      
+         } else {
+           card.countDown = 'Fuera de plazo';
+           console.log(card.countDown);
+         }
        }
+       
 
        return match;
      });
@@ -77,7 +79,7 @@ new Vue({
           date: "",
           price: "",
           state: "request",
-          countDown : 300
+          countDown : 10
       });
       $("#exampleModalCenter").modal("hide");
     }
@@ -87,11 +89,17 @@ new Vue({
 
 
 Vue.filter('minutes', function(value) {
-  let minutes = parseInt(Math.floor((value / 60))); 
-  let seconds= parseInt((value + (minutes * 60)) % 60); 
+  if (typeof value !== "number") {
+      return value;
+  }
 
-  let dMins = (minutes > 9 ? minutes : '0' + minutes);
-  let dSecs = (seconds > 9 ? seconds : '0' + seconds);
+    let minutes = parseInt(Math.floor((value / 60))); 
+    let seconds= parseInt((value + (minutes * 60)) % 60); 
 
-  return dMins + ":" + dSecs;
+    let dMins = (minutes > 9 ? minutes : '0' + minutes);
+    let dSecs = (seconds > 9 ? seconds : '0' + seconds);
+
+    return dMins + ":" + dSecs;
+  
+  
 });
