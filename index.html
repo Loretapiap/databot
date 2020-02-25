@@ -27,8 +27,20 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
+          <div class="nav-item">
+            <div class="breadcrumb">
+              <ul>
+                <li>Pedidos y reservar</li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="nav-item">
+            <i class="material-icons">calendar_today</i>
+          </div>
+          <div class="nav-item">
+            <i class="material-icons">insert_drive_file</i>
+          </div>
           <div class="nav-item profile">
             <div class="d-flex align-items-center px-3">
               <div class="flex-grow-1 text-center mr-4">
@@ -46,15 +58,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2">
-              <span class="material-icons">arrow_left</span>
-            </button>
-          </li>
-        </ul>
-      </div> -->
     </nav>
 
     <div id="wrapper" :class="{'toggled-2' : menuToggle}">
@@ -138,7 +141,7 @@
           <div id="page-content-wrapper" class="img-bg min-h">
             <div class="container-fluid xyz">
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 py-3">
                   <h1>Pedidos</h1>
                   <button class="btn btn-yellow" data-toggle="modal" data-target="#exampleModalCenter">+ Nuevo pedido
                   </button>
@@ -163,6 +166,11 @@
                     </li>
                     <li class="nav-item bg-ready">
                       <a class="nav-link" role="tab" data-toggle="tab" @click="states = ['ready']">Listo para entregar</a>
+                    </li>
+                    <li class="flex-grow-1 d-flex align-items-center justify-content-end">
+                      <i class="material-icons">account_box</i>
+                      <i class="material-icons">toggle_off</i>
+                      <i class="material-icons">list</i>
                     </li>
                   </ul>
 
@@ -211,8 +219,72 @@
           </div>
           <!-- /#page-content-wrapper -->
         </div>
-        <!-- Modal -->
+        <!-- Modal create -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-uppercase" id="exampleModalLongTitle">
+                  Nuevo pedido
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>
+                              Sin productos agregados
+                            </td>
+                          </tr>
+                          <tr v-if="false">
+                            <th scope="row">X</th>
+                            <td>Nombre</td>
+                            <td>(PRECIO))</td>
+                            <td>$TOTAL</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row justify-content-between">
+                    <button class="btn btn-primary">
+                      + Agregar producto(s)
+                    </button>
+
+                    <b>Total:</b>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Comentarios <i>(No lo ve el cliente)</i></label>
+                        <textarea name="" id="exampleInputEmail1" cols="30" rows="3" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+
+
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger">
+                  <i class="material-icons">delete</i>
+                </button>
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Salir sin guardar</button>
+                <button type="button" class="btn btn-primary btn-block" @click="createProduct()">Crear pedido</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal onlyread -->
+        <div class="modal fade" id="onlyread" tabindex="-1" role="dialog" aria-labelledby="onlyread" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">

@@ -79,8 +79,9 @@ new Vue({
           date: "",
           price: "",
           state: "request",
-          countDown : 10
+          countDown : 300
       });
+      this.states = [];
       $("#exampleModalCenter").modal("hide");
     }
   }
