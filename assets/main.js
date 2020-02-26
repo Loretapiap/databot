@@ -111,12 +111,15 @@ new Vue({
           price: "1500",
           state: "request",
           comment: this.modalInfo.comment,
+          items : this.items,
           countDown : 300
       });
       // clean filters
       this.states = [];
       this.modalInfo.type = "";
       this.modalInfo.comment = "";
+      this.items = [];
+
       $("#exampleModalCenter").modal("hide");
     },
     addItem() {

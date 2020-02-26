@@ -20,8 +20,12 @@
         <a href="#"  class="navbar-brand">
           <img src="assets/acomer.png" alt="" class="img-fluid">
         </a>
-        <div class="p-2 toggle-arrow flex-grow-1 d-flex justify-content-center align-items-center" data-toggle="collapse" id="menu-toggle" @click="menuToggle = !menuToggle">
-          <span class="material-icons">arrow_left</span>
+        <div class="d-none d-md-flex p-2 toggle-arrow flex-grow-1 justify-content-center align-items-center" data-toggle="collapse" id="menu-toggle" @click="menuToggle = !menuToggle">
+          <span class="material-icons">{{(menuToggle ? 'arrow_right' : 'arrow_left')}}</span>
+        </div>
+
+        <div class="d-md-none p-2 toggle-arrow flex-grow-1 d-flex justify-content-center align-items-center" data-toggle="collapse" id="menu-toggle" @click="subMenuToggle = !subMenuToggle">
+          <span class="material-icons">{{(subMenuToggle ? 'arrow_right' : 'arrow_left')}}</span>
         </div>
       </div>
 
@@ -62,7 +66,7 @@
       </div>
     </nav>
 
-    <div id="wrapper" :class="{'toggled-2' : menuToggle}">
+    <div id="wrapper" :class="{'toggled-2' : menuToggle, 'toggled' : subMenuToggle}">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <div class="container">
@@ -230,8 +234,6 @@
                                         <span v-if="card.state == 'ready'" class="badge badge-secondary" @click="card.state = 'done'"><i class="material-icons" style="font-size: 15px">check</i> A "Entregado"</span>                                      
                                       
                                       </div>
-                                      
-                                      {{ card.date }}
                                     </div>
                                     <div class="card-body text-center">
                                       $ {{card.price}}
@@ -252,7 +254,6 @@
               </div>
             </div>
           </div>
-          <!-- /#page-content-wrapper -->
         </div>
         <!-- Modal create -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -344,9 +345,6 @@
                     </div>
                   </div>
                 </div>
-             
-
-
               </div>
               <div class="modal-footer">
                 <button class="btn btn-danger">
@@ -363,25 +361,69 @@
         <div class="modal fade" id="onlyread" tabindex="-1" role="dialog" aria-labelledby="onlyread" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" :class="'bg-' + modalInfo.state">
                 <h5 class="modal-title text-uppercase">
                   {{modalInfo.title}}
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="close-btn d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
               </div>
               <div class="modal-body">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col">
-                      <p>{{modalInfo.title}}</p>
-                      <p>{{modalInfo.type}}</p>
-                      <p>{{modalInfo.hour}}</p>
-                      <p>{{modalInfo.date}}</p>
-                      <p>{{modalInfo.price}}</p>
-                      <p>{{modalInfo.state}}</p>
-                      <p>{{modalInfo.comment}}</p>
+                    <div class="col-12">
+                      <h3>Resumen:</h3>
+                      <p><b>Titulo: </b>{{modalInfo.title}}</p>
+                      <p><b>Tipo: </b>{{modalInfo.type}}</p>
+                      <p><b>Estado: </b>{{modalInfo.state}}</p>
+                      <p><b>Fecha: </b>{{modalInfo.date}}</p>
+                      <p><b>Hora: </b>{{modalInfo.hour}}</p>                      
+                      <p><b>Precio: </b>{{modalInfo.price}}</p>                      
+                      <p><b>Comentario: </b>{{(modalInfo.comment ? modalInfo.comment : 'Sin comentario')}}</p>
+                      
+                    </div>
+                  </div>
+
+                  <div class="row" v-if="modalInfo.items">
+                    <div class="col-12">
+                      <p><b>Productos agregados</b></p>
+                      <div class="table-responsive">
+                        <table class="table stripes-yellow">
+                          <thead class="thead-light">
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                          </thead>
+                          <tbody>
+                            <tr v-if="items" v-for="(item, index) in modalInfo.items">
+                              <td width="25">
+                                {{item.value}}
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <i class="icons-07 material-icons">attach_money</i>
+                                  {{item.price}}
+                                </div>                              
+                              </td>
+
+                              <td>
+                                {{item.count}}                                
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <i class="icons-07 material-icons">attach_money</i>
+                                  {{ item.price * ((item.count > 0) ? item.count : 0) }}
+                                </div> 
+                                
+                              </td>
+                            </tr>
+  
+                          </tbody>
+                        </table>
+  
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -390,7 +432,7 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Salir sin guardar</button>
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Salir</button>
               </div>
             </div>
           </div>
