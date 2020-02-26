@@ -219,6 +219,11 @@ body {
   color: white;
 }
 
+.done {
+  background: #6c757d;
+  color: white;
+}
+
 /* flex */
 
 .flex-grow-1 {

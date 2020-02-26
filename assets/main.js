@@ -5,7 +5,6 @@ new Vue({
     return {
       menuToggle : false,
       subMenuToggle : false,
-      comment : "",
       searchVal: "",
       states: [],
       items: [],
@@ -21,19 +20,35 @@ new Vue({
         },
         {
           title: "Pedido 2",
-          type: "reservation",
+          type: "togo",
           hour: "14:00",
           date: "Febrero 21, 2020",
-          price: 16500,
+          price: 23690,
           state: "ready"
         },
         {
           title: "Pedido 3",
-          type: "reservation",
+          type: "local",
           hour: "14:00",
           date: "Febrero 21, 2020",
-          price: 16500,
+          price: 1750,
           state: "request"
+        },
+        {
+          title: "Pedido comensal",
+          type: "local",
+          hour: "14:00",
+          date: "Febrero 21, 2020",
+          price: 2350,
+          state: "request"
+        },
+        {
+          title: "Pedido nocturno",
+          type: "local",
+          hour: "23:00",
+          date: "Febrero 24, 2020",
+          price: 6500,
+          state: "done"
         }
       ],
       modalInfo: {
@@ -90,21 +105,27 @@ new Vue({
     createProduct(){
       this.cards.push({
           title: "",
-          type: "reservation",
+          type: this.modalInfo.type,
           hour: "14:00",
           date: new Date().toJSON().slice(0,10),
           price: "1500",
           state: "request",
-          comment: this.comment,
+          comment: this.modalInfo.comment,
           countDown : 300
       });
       // clean filters
       this.states = [];
-      this.comment = "";
+      this.modalInfo.type = "";
+      this.modalInfo.comment = "";
       $("#exampleModalCenter").modal("hide");
     },
     addItem() {
-      this.items.push({ value: '', description: '', price: '', count : 1 });
+      this.items.push({ 
+        value: '', 
+        description: '', 
+        price: '', 
+        count : 1 
+      });
     },
     deletItem(index) {
       this.items.splice(index, 1);
