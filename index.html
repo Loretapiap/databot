@@ -273,7 +273,16 @@
                                   <input placeholder="Precio" v-model="item.price">
                                 </div>                              
                               </td>
-                              <td>{{item.price}}</td>
+
+                              <td class="noselect">
+                                <div class="d-flex align-items-center">
+                                  <span class="pointer icons-xl material-icons text-danger" @click="item.count -= 1">remove</span>
+                                  {{item.count}}
+                                  <span class="pointer icons-xl material-icons text-success" @click="item.count += 1">add</span>
+                                </div>
+                                
+                              </td>
+                              <td>{{ item.price * ((item.count > 0) ? item.count : 0) }}</td>
                             </tr>
   
                           </tbody>
@@ -288,7 +297,7 @@
                       + Agregar producto(s)
                     </button>
 
-                    <b>Total:</b>
+                    <b>Total: ({{items.length}} productos)</b>
                   </div>
                   <div class="row">
                     <div class="col">

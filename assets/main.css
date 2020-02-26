@@ -334,3 +334,7 @@ body {
 .pointer:hover {
   cursor: pointer;
 }
+
+.noselect {
+  user-select: none; 
+}
