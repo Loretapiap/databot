@@ -8,6 +8,7 @@ new Vue({
       comment : "",
       searchVal: "",
       states: [],
+      items: [],
       cards: [
         {
           title: "Pedido 1",
@@ -101,11 +102,15 @@ new Vue({
       this.states = [];
       this.comment = "";
       $("#exampleModalCenter").modal("hide");
+    },
+    addItem() {
+      this.items.push({ value: '', description: '', price: '', count : 1 });
+    },
+    deletItem(index) {
+      this.items.splice(index, 1);
     }
   }
 });
-
-
 
 Vue.filter('minutes', function(value) {
   if (typeof value !== "number") {
@@ -118,7 +123,6 @@ Vue.filter('minutes', function(value) {
     let dMins = (minutes > 9 ? minutes : '0' + minutes);
     let dSecs = (seconds > 9 ? seconds : '0' + seconds);
 
-    return dMins + ":" + dSecs;
-  
+    return dMins + ":" + dSecs; 
   
 });

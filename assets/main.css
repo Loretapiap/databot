@@ -281,6 +281,11 @@ body {
   color: #707070;
 }
 
+.icons-07 {
+  font-size: 1.7em; 
+  color: #707070;
+}
+
 .modal-new {
   background: #FFFDE7;
   color: #FF9600;
@@ -290,15 +295,42 @@ body {
 .close-btn {
   color: white;
   background: grey !important;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+}
+
+.close-btn span {
+  font-size: 1.5em;
+}
+
+.add-btn {
+  color: white;
+  background: #FC9B00 !important;
   height: 45px;
   width: 45px;
   border-radius: 100%;
+  position: absolute;
+  left: -22px;
 }
 
 .close-btn:hover {
   cursor: pointer;
 }
 
-.close-btn span {
-  font-size: 2em;
+.stripes-yellow td {
+  vertical-align: unset;
+}
+
+.stripes-yellow tbody tr:nth-of-type(odd) {
+  background: #FFFDE7;
+}
+
+.stripes-yellow input {
+  border: 0;
+  background: transparent;
+}
+
+.pointer:hover {
+  cursor: pointer;
 }

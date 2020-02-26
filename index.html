@@ -196,9 +196,9 @@
                               <div class="row">
                                 <div class="col-md-3" v-for="(card, index) in filteredCards">
                                   <div class="card" @click="openModal(card)">
-                                    <div class="card-header font-weight-bold" :class="card.state">
+                                    <div class="card-header font-weight-bold d-flex align-items-center justify-content-between pointer" :class="card.state">
                                       Nº {{ index + 1  }}
-                                      <i class="material-icons icon-image-preview float-right">remove_red_eye</i>
+                                      <i class="material-icons">remove_red_eye</i>
                                       <!-- timer -->
                                       <span v-if="card.countDown">
                                         {{ card.countDown | minutes }}
@@ -233,39 +233,58 @@
         </div>
         <!-- Modal create -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog  modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header modal-new py-2 align-items-center">
-                <h5 class="modal-title text-uppercase" id="exampleModalLongTitle">
+                <h5 class="modal-title text-uppercase ml-3" id="exampleModalLongTitle">
                   Nuevo pedido
                 </h5>
                 <div class="close-btn d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </div>
+
+                <div class="add-btn d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
+                  <span class="material-icons">add</span>
+                </div>
               </div>
               <div class="modal-body">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              Sin productos agregados
-                            </td>
-                          </tr>
-                          <tr v-if="false">
-                            <th scope="row">X</th>
-                            <td>Nombre</td>
-                            <td>(PRECIO))</td>
-                            <td>$TOTAL</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <h3 class="mb-2">Productos</h3>
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="table stripes-yellow">
+                          <tbody>
+                            <tr v-if="!items">
+                              <td>
+                                Sin productos agregados
+                              </td>
+                            </tr>
+                            <tr v-if="items" v-for="(item, index) in items">
+                              <th scope="row">
+                                <span @click="deletItem(index)" class="pointer icons-07" aria-hidden="true">&times;</span>
+                              </th>
+                              <td width="25">
+                                <input placeholder="Item" v-model="item.value">
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <i class="icons-07 material-icons">attach_money</i>
+                                  <input placeholder="Precio" v-model="item.price">
+                                </div>                              
+                              </td>
+                              <td>{{item.price}}</td>
+                            </tr>
+  
+                          </tbody>
+                        </table>
+  
+                      </div>
                     </div>
+                    
                   </div>
                   <div class="row justify-content-between">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" @click="addItem()">
                       + Agregar producto(s)
                     </button>
 
@@ -350,5 +369,4 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script>
       <script src="assets/main.js"></script>
     </body>
-
     </html>
