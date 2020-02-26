@@ -53,7 +53,7 @@ new Vue({
       ],
       modalInfo: {
         title: "",
-        type: "",
+        type: "none",
         hour: "",
         date: "",
         price: "",
@@ -116,11 +116,16 @@ new Vue({
       });
       // clean filters
       this.states = [];
-      this.modalInfo.type = "";
+      this.modalInfo.type = "none";
       this.modalInfo.comment = "";
       this.items = [];
 
       $("#exampleModalCenter").modal("hide");
+    },
+    cleanProduct() {
+      this.modalInfo.type = "none";
+      this.modalInfo.comment = "";
+      this.items = [];
     },
     addItem() {
       this.items.push({ 
