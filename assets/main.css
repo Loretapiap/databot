@@ -280,3 +280,25 @@ body {
   font-size: 3em; 
   color: #707070;
 }
+
+.modal-new {
+  background: #FFFDE7;
+  color: #FF9600;
+  font-weight: bold;
+}
+
+.close-btn {
+  color: white;
+  background: grey !important;
+  height: 45px;
+  width: 45px;
+  border-radius: 100%;
+}
+
+.close-btn:hover {
+  cursor: pointer;
+}
+
+.close-btn span {
+  font-size: 2em;
+}

@@ -187,7 +187,7 @@
                   </ul>
 
                   <!-- Tab panes -->
-                  <div class="tab-content">
+                  <div class="tab-content" :class="'bg-' + states">
                     <div role="tabpanel" class="tab-pane active">
                       <div class="container-fluid">
                         <div class="row">
@@ -196,9 +196,9 @@
                               <div class="row">
                                 <div class="col-md-3" v-for="(card, index) in filteredCards">
                                   <div class="card" @click="openModal(card)">
-                                    <div class="card-header" :class="card.state">
-                                      Nº {{ index }}
-          
+                                    <div class="card-header font-weight-bold" :class="card.state">
+                                      Nº {{ index + 1  }}
+                                      <i class="material-icons icon-image-preview float-right">remove_red_eye</i>
                                       <!-- timer -->
                                       <span v-if="card.countDown">
                                         {{ card.countDown | minutes }}
@@ -235,13 +235,13 @@
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header modal-new py-2 align-items-center">
                 <h5 class="modal-title text-uppercase" id="exampleModalLongTitle">
                   Nuevo pedido
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="close-btn d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
               </div>
               <div class="modal-body">
                 <div class="container-fluid">
@@ -275,7 +275,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Comentarios <i>(No lo ve el cliente)</i></label>
-                        <textarea name="" id="exampleInputEmail1" cols="30" rows="3" class="form-control"></textarea>
+                        <textarea name="" id="exampleInputEmail1" cols="30" rows="3" class="form-control" v-model="comment"></textarea>
                       </div>
                     </div>
                   </div>
@@ -317,6 +317,7 @@
                       <p>{{modalInfo.date}}</p>
                       <p>{{modalInfo.price}}</p>
                       <p>{{modalInfo.state}}</p>
+                      <p>{{modalInfo.comment}}</p>
                     </div>
                   </div>
                 </div>
